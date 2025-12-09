@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.31)
 
 project(miniNginx LANGUAGES CXX)
 
@@ -10,11 +10,8 @@ add_executable(miniNginx
     source/blocking_safe_queue.cpp
     source/lru_cache.cpp
     source/thread_pool.cpp
-    include/blocking_safe_stack.h
     source/blocking_safe_stack.cpp
-    include/thread_safe_stack.h
     source/thread_safe_stack.cpp
-    include/thread_safe_queue.h
     source/thread_safe_queue.cpp
 )
 

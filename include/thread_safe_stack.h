@@ -11,8 +11,8 @@ public:
     ~thread_safe_stack() = default;
     thread_safe_stack(const thread_safe_stack& other);
     thread_safe_stack(const thread_safe_stack&& other);
-    thread_safe_stack& operator=(const thread_safe_stack& other);
-    thread_safe_stack& operator=(const thread_safe_stack&& other);
+    thread_safe_stack& operator=(thread_safe_stack& other);
+    thread_safe_stack& operator=(thread_safe_stack&& other);
 
     template<typename U>
     void push(U&& value);
@@ -22,8 +22,10 @@ public:
 
     bool               try_pop(T& value) noexcept;
     std::shared_ptr<T> try_pop() noexcept;
+
     void               pop(T& value);
     std::shared_ptr<T> pop();
+
     bool               empty() const;
     size_t             get_size() const;
     void               swap(thread_safe_stack& other) noexcept;

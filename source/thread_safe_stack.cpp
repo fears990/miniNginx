@@ -15,7 +15,7 @@ thread_safe_stack<T>::thread_safe_stack(const thread_safe_stack&& other)
 }
 
 template<typename T>
-thread_safe_stack<T>& thread_safe_stack<T>::operator=(const thread_safe_stack& other)
+thread_safe_stack<T>& thread_safe_stack<T>::operator=(thread_safe_stack& other)
 {
     if (this == &other)
     {
@@ -52,9 +52,9 @@ std::shared_ptr<T> thread_safe_stack<T>::try_pop() noexcept
         return nullptr;
     }
 
-    auto shared_ptr = std::make_shared<T>(std::move(m_data.top()));
+    auto ptr = std::make_shared<T>(std::move(m_data.top()));
     m_data.pop();
-    return shared_ptr;
+    return ptr;
 }
 
 template<typename T>
@@ -79,9 +79,9 @@ std::shared_ptr<T> thread_safe_stack<T>::pop()
         throw std::runtime_error("Empty stack");
     }
 
-    auto shared_ptr = std::make_shared<T>(std::move(m_data.pop()));
+    auto ptr = std::make_shared<T>(std::move(m_data.pop()));
     m_data.pop();
-    return shared_ptr;
+    return ptr;
 }
 
 template<typename T>
@@ -107,7 +107,7 @@ void thread_safe_stack<T>::swap(thread_safe_stack& other) noexcept
 {}
 
 template<typename T>
-thread_safe_stack<T>& thread_safe_stack<T>::operator=(const thread_safe_stack&& other)
+thread_safe_stack<T>& thread_safe_stack<T>::operator=(thread_safe_stack&& other)
 {
     if (this == &other)
     {
@@ -127,7 +127,7 @@ template<typename U>
 void thread_safe_stack<T>::push(U&& value)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
-    m_data = std::forward<U>(value);
+    m_data.push(std::forward<U>(value));
 }
 
 template<typename T>

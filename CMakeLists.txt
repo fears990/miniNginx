@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(miniNginx
     main.cpp
-    source/blocking_safe_queue.cpp
+
     source/lru_cache.cpp
     source/thread_pool.cpp
     source/blocking_safe_stack.cpp

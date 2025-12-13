@@ -13,6 +13,7 @@ add_executable(miniNginx
     source/blocking_safe_stack.cpp
     source/thread_safe_stack.cpp
     source/thread_safe_queue.cpp
+    include/i_logger.h
 )
 
 include(GNUInstallDirs)
